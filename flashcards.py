@@ -45,7 +45,7 @@ colors = ["#ffadad", "#ffd6a5", "#fdffb6", "#caffbf", "#9bf6ff", "#a0c4ff", "#bd
 # Menu Options Function
 def selectMenuOption(options):
     selectedIndex = -1
-    while selectedIndex == -1:
+    while selectedIndex == -1 or selectedIndex >= len(options):
         print("\nPlease select from the following options.")
         for i in range(0, len(options)):
             letterToPrint = getLetterFromIndex(i).upper()
@@ -54,7 +54,7 @@ def selectMenuOption(options):
             print(letterToPrint + ". " + text)
         userInput = input("\nSelected letter: ")
         selectedIndex = getOptionIndexByLetter(userInput)
-        if selectedIndex == -1:
+        if selectedIndex == -1 or selectedIndex >= len(options):
             print("Error in selecting option. Please enter valid letter for an option.")
         else:
             func = options[selectedIndex][1]
@@ -76,28 +76,83 @@ def createNewFile():
     nameOfClass = input("Name of class: ")
     print("\nOkay, let's create a chapter to add flashcards to.")
 
-    chapterNumber = 0
-    chapterName = ""
-    flashcardsInChapter = []
+    chapters = []
+    #chapterNumber = 0
+    #chapterName = ""
+    #flashcardsInChapter = []
+    #hasAtLeastOneChapter = False
+
+    def addNewFlashcard(flashcardsInChapter):
+        print("")
+        print("Adding new flashcard.")
+        flashcardsInChapter.append({
+            "symbol": {
+                "color": "#ffffff",
+                "number": 100,
+            },
+            "question": "Question or description here",
+            "answer": "Answer to question here"
+        })
 
     def createNewChapter():
         print("")
+        #global chapterNumber
         chapterNumber = getInteger("Chapter number: ")
+        #global chapterName
         chapterName = input("Chapter name: ")
 
-    def addNewFlashcard():
-        print("")
-        print("Adding new flashcard.")
+        #global flashcardsInChapter
+        flashcardsInChapter = []
+        addAnotherFlashcard = True
+        while addAnotherFlashcard == True:
+            addNewFlashcard(flashcardsInChapter)
+            userAnswer = formatInput(input("Add another flashcard to chapter?(y/n): "))
+            if userAnswer != "y":
+                addAnotherFlashcard = False
 
-    def createNewChapterFromMenu():
-        if len(flashcardsInChapter) == 0:
-            print("\nPlease create at least one flashcard in the current chapter before creating a new one.")
-        else:
-            createNewChapter()
+        chapter = {
+            "chapterNumber": chapterNumber,
+            "chapterName": chapterName,
+            "flashcards": flashcardsInChapter
+        }
+        print("New chapter: ", chapter)
+        chapters.append(chapter)
+        print("Test - chapters: ", chapters)
+        #global hasAtLeastOneChapter
+        #hasAtLeastOneChapter = True
+        #print("Has at least one chapter now after createNewChapter?: ", str(hasAtLeastOneChapter))
+
+    
+
+    # def createNewChapterFromMenu():
+    #     #global chapters
+    #     #chapters.append("test")
+    #     global hasAtLeastOneChapter
+    #     print("Has at least one chapter at start of createNewChapterFromMenu?: ", str(hasAtLeastOneChapter))
+    #     print("Length of chapters: ", str(len(chapters)))
+        
+    #     #global hasAtLeastOneChapter
+    #     if len(flashcardsInChapter) == 0:
+    #         print("\nPlease create at least one flashcard in the current chapter before creating a new one.")
+    #     else:
+    #         print("Has at least one chapter after else statenet?: ", str(hasAtLeastOneChapter))
+    #         # add chapter to list of chapters before creating new chapter
+    #         if hasAtLeastOneChapter == True:
+    #             print("has at least one chapter is true after checking")
+    #             chapter = {
+    #                 "chapterNumber": chapterNumber,
+    #                 "chapterName": chapterName,
+    #                 "flashcards": flashcardsInChapter
+    #             }
+    #             print("New chapter: ", chapter)
+    #             chapters.append(chapter)
+    #     print("Test - chapters: ", chapters)
+    #     createNewChapter()
+            
 
     fileMenuOptions = [
-        ["Create new chapter for adding flashcards", createNewChapterFromMenu],
-        ["Add new flashcard to chapter", addNewFlashcard],
+        ["Create new chapter for adding flashcards", createNewChapter],
+        # ["Add new flashcard to chapter", addNewFlashcard],
         ["Save progress", unavailableOption],
         ["Return to main menu", unavailableOption],
         ["Exit program", exitProgram]
@@ -105,7 +160,7 @@ def createNewFile():
 
     #Create a chapter by default and add one flashcard. After that, start showing menu.
     createNewChapter()
-    addNewFlashcard()
+    #addNewFlashcard()
     selectMenuOption(fileMenuOptions)
 
 # Menu Option Variables
