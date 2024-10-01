@@ -1,5 +1,6 @@
 import sys
 import random
+import json
 
 # Basic functions
 def formatInput(input):
@@ -110,12 +111,14 @@ def modifyFileInfo():
         print("")
         print("Adding new flashcard.")
         newSymbol = generateRandomSymbol(fileInfo["usedSymbols"])
+        question = input("Question or definition: ")
+        answer = ("Answer: ")
         # print("Test - newSymbol: ", newSymbol)
         # print("Test - usedSymbols: ", fileInfo["usedSymbols"])
         flashcardsInChapter.append({
             "symbol": newSymbol,
-            "question": "Question or description here",
-            "answer": "Answer to question here"
+            "question": question,
+            "answer": answer
         })
 
     def createNewChapter():
