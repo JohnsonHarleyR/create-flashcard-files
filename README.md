@@ -24,7 +24,7 @@ The sole purpose of this file should be to aid in creating flashcard.py.
 # Files Folder - files/
 This is where all the text files created by flashcards.py should be stored. This should be accessed by the html/javascript file as well in order to display the flashcards.
 
-# HTML/JavaScript
+# HTML/JavaScript - index.html
 A page to display and even print the flashcards will eventually be created once the python files are complete.
 
 # Format for Dictionary of Flashcards
