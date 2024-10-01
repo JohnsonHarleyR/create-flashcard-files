@@ -23,6 +23,18 @@ def getInteger(inputString):
             print("Input is not an integer. Please try again.")
     return int(userInput)
 
+def getTxtFileName(inputString):
+    isCorrectFormat = False
+    userInput = ""
+    while isCorrectFormat == False:
+        userInput = formatInput(input(inputString))
+        if ".txt" not in userInput:
+            print("Must be '.txt' file. Please add '.txt' to the end.")
+        else:
+            isCorrectFormat = True
+    return userInput
+        
+
 allLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 def getOptionIndexByLetter(letter):
     formattedLetter = formatInput(letter)
