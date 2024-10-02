@@ -1,0 +1,103 @@
+{
+    "chapters": [
+        {
+            "chapterName": "Test Chapter 1",
+            "chapterNumber": 1,
+            "flashcards": [
+                {
+                    "answer": "Test 1A",
+                    "question": "Test 1Q",
+                    "symbol": {
+                        "color": "#caffbf",
+                        "number": "2663"
+                    }
+                },
+                {
+                    "answer": "Test 2A",
+                    "question": "Test 2Q",
+                    "symbol": {
+                        "color": "#caffbf",
+                        "number": "2643"
+                    }
+                },
+                {
+                    "answer": "Test 3A",
+                    "question": "Test 3Q",
+                    "symbol": {
+                        "color": "#ffadad",
+                        "number": "2625"
+                    }
+                }
+            ]
+        },
+        {
+            "chapterName": "Test Chapter 2",
+            "chapterNumber": 2,
+            "flashcards": [
+                {
+                    "answer": "Test 2 1A - real",
+                    "question": "Test 2 1A",
+                    "symbol": {
+                        "color": "#bdb2ff",
+                        "number": "2603"
+                    }
+                },
+                {
+                    "answer": "Test 2 2A",
+                    "question": "Test 2 2Q",
+                    "symbol": {
+                        "color": "#bdb2ff",
+                        "number": "2667"
+                    }
+                },
+                {
+                    "answer": "Test 2 3A",
+                    "question": "Test 2 3Q",
+                    "symbol": {
+                        "color": "#ffadad",
+                        "number": "2663"
+                    }
+                },
+                {
+                    "answer": "Test 2 4A",
+                    "question": "Test 2 4Q",
+                    "symbol": {
+                        "color": "#bdb2ff",
+                        "number": "2612"
+                    }
+                }
+            ]
+        }
+    ],
+    "className": "Test 3",
+    "usedSymbols": [
+        {
+            "color": "#caffbf",
+            "number": "2663"
+        },
+        {
+            "color": "#caffbf",
+            "number": "2643"
+        },
+        {
+            "color": "#ffadad",
+            "number": "2625"
+        },
+        {
+            "color": "#bdb2ff",
+            "number": "2603"
+        },
+        {
+            "color": "#bdb2ff",
+            "number": "2667"
+        },
+        {
+            "color": "#ffadad",
+            "number": "2663"
+        },
+        {
+            "color": "#bdb2ff",
+            "number": "2612"
+        }
+    ]
+}

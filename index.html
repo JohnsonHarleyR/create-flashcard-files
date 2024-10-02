@@ -4,8 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashcards</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     Flashcards will be readable here!
+    <br>
+    <label for="fileName">Flashcards file name:</label>
+    <input type="text" id="fileName" name="fileName">
+    <button id="fileNameButton">Submit</button>
+    <br>
+    <div id="flashcard">
+        <div id="symbol">symbol test</div>
+        <div id="nameAndChapter">
+            <span id="className">Class Title</span> Ch. <span id="chapterNumber">0</span>
+        </div>
+        <div id="questionOrAnswer">Question or answer will be here.</div>
+    </div>
+
+    <script>
+        let fileName = "";
+        let chapterNumber = -1;
+        let className = "Class Name Text";
+
+        let symbolCode = '\u{2600}';
+        let symbolColor = "#caffbf";
+        let question = "Question text here";
+        let answer = "answer text here";
+        let isQuestionSide = true;
+
+        let flashCardSymbol = document.getElementById("symbol");
+        let classNameText = document.getElementById("className");
+        let chapterNumberText = document.getElementById("chapterNumber");
+        let questionOrAnswerText = document.getElementById("questionOrAnswer")
+
+        // On initial load
+        flashCardSymbol.textContent = symbolCode;
+    </script>
 </body>
 </html>

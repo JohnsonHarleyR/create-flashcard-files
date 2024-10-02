@@ -1,0 +1,10 @@
+body {
+    background-color: bisque;
+}
+
+#flashcard {
+    width: 500px;
+    height: 300px;
+    border: 2px solid black;
+    background-color: white;
+}
