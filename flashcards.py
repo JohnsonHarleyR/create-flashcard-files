@@ -111,7 +111,7 @@ def createNewFile():
     global fileInfo
     print("")
     #TODO Add validation for filename
-    nameForFile = input("Creating new flashcards file. What should the file be called?: ")
+    nameForFile = getTxtFileName("Creating new flashcards file. What should the file be called?: ")
     fileInfo["className"] = input("Name of class: ")
     print("\nOkay, let's create a chapter to add flashcards to.")
 
@@ -124,7 +124,7 @@ def modifyFileInfo():
         print("Adding new flashcard.")
         newSymbol = generateRandomSymbol(fileInfo["usedSymbols"])
         question = input("Question or definition: ")
-        answer = ("Answer: ")
+        answer = input("Answer: ")
         # print("Test - newSymbol: ", newSymbol)
         # print("Test - usedSymbols: ", fileInfo["usedSymbols"])
         flashcardsInChapter.append({
@@ -133,15 +133,31 @@ def modifyFileInfo():
             "answer": answer
         })
 
-    def createNewChapter():
-        print("")
-        #global chapterNumber
-        chapterNumber = getInteger("Chapter number: ")
-        #global chapterName
-        chapterName = input("Chapter name: ")
+    def doesChapterAlreadyExist(chapterNumber):
+        #print("Does chapter " + str(chapterNumber) + " already exist?")
+        chapters = fileInfo["chapters"]
+        for chapter in chapters:
+            #print("checking chapter number " + str(chapter["chapterNumber"]))
+            if chapter["chapterNumber"] == chapterNumber:
+                #print("Yes")
+                return True
+        #print("No")
+        return False
 
-        #global flashcardsInChapter
-        flashcardsInChapter = []
+    def getChapterIndex(chapterNumber):
+        chapters = fileInfo["chapters"]
+        for i in range(0, len(chapters)):
+            if chapters[i]["chapterNumber"] == chapterNumber:
+                return i
+        return -1 #indicates nothings was found
+
+    def printExistingChapters():
+        print("\nHere are the existing chapters.")
+        for chapter in fileInfo["chapters"]:
+            print(str(chapter["chapterNumber"]) + ". " + chapter["chapterName"])
+
+
+    def assembleChapterWithFlashcards(chapterNumber, chapterName, flashcardsInChapter = []):
         addAnotherFlashcard = True
         while addAnotherFlashcard == True:
             addNewFlashcard(flashcardsInChapter)
@@ -154,28 +170,76 @@ def modifyFileInfo():
             "chapterName": chapterName,
             "flashcards": flashcardsInChapter
         }
-        #print("New chapter: ", chapter)
+        return chapter
+
+    def modifyExistingChapter():
+        global fileInfo
+        if len(fileInfo["chapters"]) == 0:
+            print("No chapters exist yet. Please create a new one.")
+            return
+        
+        chapterNumber = -1
+        doesChapterExist = False
+        while doesChapterExist == False:
+            printExistingChapters()
+            #TODO allow options other than just adding more flashcards, but for now this is fine
+            chapterNumber = getInteger("Which chapter would you like to add flashcards to?: ")
+            doesChapterExist = doesChapterAlreadyExist(chapterNumber)
+            if doesChapterExist == False:
+                print("\nThat chapter doesn't exist. Please choose an existing chapter.")
+        chapterIndex = getChapterIndex(chapterNumber)
+        
+        chapterNumber = fileInfo["chapters"][chapterIndex]["chapterNumber"]
+        chapterName = fileInfo["chapters"][chapterIndex]["chapterName"]
+        chapterFlashcards = fileInfo["chapters"][chapterIndex]["flashcards"]
+
+        replacementChapter = assembleChapterWithFlashcards(chapterNumber, chapterName, chapterFlashcards)
+
+        fileInfo["chapters"][chapterIndex]["flashcards"] = replacementChapter["flashcards"]
+        print("Test - chapters: ", fileInfo["chapters"])
+        print("Test - fileInfo: ", fileInfo)
+
+    def createNewChapter():
+        global fileInfo
+        print("")
+        # TODO Ensure chapter number doesn't already exist
+        chapterNumber = 0
+        alreadyExists = True
+        while alreadyExists == True:
+            chapterNumber = getInteger("Chapter number: ")
+            alreadyExists = doesChapterAlreadyExist(chapterNumber)
+            if alreadyExists == True:
+                #TODO If the number already exists, give an option to switch over to modifying that chapter
+                print("That chapter number already exists. Please enter a new chapter.")
+        
+        chapterName = input("Chapter name: ")
+
+        chapter = assembleChapterWithFlashcards(chapterNumber, chapterName)
+        
         fileInfo["chapters"].append(chapter)
         print("Test - chapters: ", fileInfo["chapters"])
+        print("Test - fileInfo: ", fileInfo)
             
 
     fileMenuOptions = [
         ["Create new chapter for adding flashcards", createNewChapter],
         # ["Add new flashcard to chapter", addNewFlashcard],
-        ["Modify existing chapter", unavailableOption],
+        ["Modify existing chapter", modifyExistingChapter],
         ["Save progress", unavailableOption],
         ["Return to main menu", unavailableOption],
         ["Exit program", exitProgram]
     ]
 
+
     #Create a chapter by default and add one flashcard. After that, start showing menu.
-    createNewChapter()
-    #addNewFlashcard()
+    #createNewChapter()
+    
     selectMenuOption(fileMenuOptions)
 
 # Menu Option Variables
 mainMenuOptions = [
-    ["Create New File", modifyFileInfo],
+    # ["Create New File", modifyFileInfo],
+    ["Create New File", createNewFile],
     ["Load Existing File", unavailableOption],
     ["Exit Program", exitProgram]
 ]
