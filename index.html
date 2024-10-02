@@ -13,10 +13,10 @@
     <input type="text" id="fileName" name="fileName">
     <button id="fileNameButton">Submit</button>
     <br>
-    <div id="flashcard">
+    <div id="flashcard" onclick="flipSide()">
         <div id="symbol">symbol test</div>
         <div id="nameAndChapter">
-            <span id="className">Class Title</span> Ch. <span id="chapterNumber">0</span>
+            <h3><span id="className">Class Title</span> Ch. <span id="chapterNumber">0</span></h3>
         </div>
         <div id="questionOrAnswer">Question or answer will be here.</div>
     </div>
@@ -30,7 +30,7 @@
         let symbolColor = "#caffbf";
         let question = "Question text here";
         let answer = "answer text here";
-        let isQuestionSide = true;
+        let sideToShow = 0;
 
         let flashCardSymbol = document.getElementById("symbol");
         let classNameText = document.getElementById("className");
@@ -39,6 +39,17 @@
 
         // On initial load
         flashCardSymbol.textContent = symbolCode;
+        flashCardSymbol.style.color = symbolColor;
+        classNameText.textContent = className;
+        chapterNumberText.textContent = chapterNumber;
+        questionOrAnswerText.textContent = sideToShow === 0 ? question : answer;
+
+        function flipSide() {
+            console.log("flip side");
+            sideToShow = sideToShow === 0 ? 1 : 0;
+            questionOrAnswerText.textContent = sideToShow === 0 ? question : answer;
+        }
+
     </script>
 </body>
 </html>
