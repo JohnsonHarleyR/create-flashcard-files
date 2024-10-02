@@ -34,6 +34,8 @@ def getTxtFileName(inputString):
             isCorrectFormat = True
     return userInput
         
+def convertToJson(dict):
+    return json.dumps(dict, sort_keys=True, indent=4)
 
 allLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 def getOptionIndexByLetter(letter):
@@ -103,14 +105,11 @@ def selectMenuOption(options):
 def unavailableOption():
     print("OPTION IS UNAVAILABLE")
 
-def exitProgram():
-    print("\nExiting Program. Goodbye!")
-    sys.exit()
-
 def createNewFile():
     global fileInfo
     print("")
     #TODO Add validation for filename
+    global nameForFile
     nameForFile = getTxtFileName("Creating new flashcards file. What should the file be called?: ")
     fileInfo["className"] = input("Name of class: ")
     print("\nOkay, let's create a chapter to add flashcards to.")
@@ -196,8 +195,8 @@ def modifyFileInfo():
         replacementChapter = assembleChapterWithFlashcards(chapterNumber, chapterName, chapterFlashcards)
 
         fileInfo["chapters"][chapterIndex]["flashcards"] = replacementChapter["flashcards"]
-        print("Test - chapters: ", fileInfo["chapters"])
-        print("Test - fileInfo: ", fileInfo)
+        # print("Test - chapters: ", fileInfo["chapters"])
+        # print("Test - fileInfo: ", fileInfo)
 
     def createNewChapter():
         global fileInfo
@@ -217,15 +216,34 @@ def modifyFileInfo():
         chapter = assembleChapterWithFlashcards(chapterNumber, chapterName)
         
         fileInfo["chapters"].append(chapter)
-        print("Test - chapters: ", fileInfo["chapters"])
-        print("Test - fileInfo: ", fileInfo)
+        # print("Test - chapters: ", fileInfo["chapters"])
+        # print("Test - fileInfo: ", fileInfo)
             
+    def saveFile():
+        fileInfoAsJson = convertToJson(fileInfo)
+        filePath = f"files/{nameForFile}"
+        print("name for file: ", nameForFile)
+        with open(filePath, 'w') as convert_file: 
+            convert_file.write(fileInfoAsJson)
+        # with open(nameForFile, 'w') as convert_file: 
+        #     convert_file.write(fileInfoAsJson)
+        print("\nSave is complete!")
+
+    def askToSaveFirst():
+        userAnswer = formatInput(input("\nWould you like to save first?(y/n): "))
+        if userAnswer == "y":
+            saveFile()
+
+    def exitProgram():
+        askToSaveFirst()
+        print("\nExiting Program. Goodbye!")
+        sys.exit()
 
     fileMenuOptions = [
         ["Create new chapter for adding flashcards", createNewChapter],
         # ["Add new flashcard to chapter", addNewFlashcard],
         ["Modify existing chapter", modifyExistingChapter],
-        ["Save progress", unavailableOption],
+        ["Save progress", saveFile],
         ["Return to main menu", unavailableOption],
         ["Exit program", exitProgram]
     ]
@@ -236,12 +254,16 @@ def modifyFileInfo():
     
     selectMenuOption(fileMenuOptions)
 
+def exitFromMainMenu():
+    print("\nExiting Program. Goodbye!")
+    sys.exit()
+
 # Menu Option Variables
 mainMenuOptions = [
     # ["Create New File", modifyFileInfo],
     ["Create New File", createNewFile],
     ["Load Existing File", unavailableOption],
-    ["Exit Program", exitProgram]
+    ["Exit Program", exitFromMainMenu]
 ]
 
 def showMainMenu():
