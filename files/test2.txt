@@ -1,0 +1,67 @@
+{
+    "chapters": [
+        {
+            "chapterName": "test 1",
+            "chapterNumber": 1,
+            "flashcards": [
+                {
+                    "answer": "test 1 a1",
+                    "question": "test 1 q1",
+                    "symbol": {
+                        "color": "#ffd6a5",
+                        "number": 10809
+                    }
+                },
+                {
+                    "answer": "test 1 a2",
+                    "question": "test 1 q2",
+                    "symbol": {
+                        "color": "#ffd6a5",
+                        "number": 9691
+                    }
+                }
+            ]
+        },
+        {
+            "chapterName": "test 2",
+            "chapterNumber": 2,
+            "flashcards": [
+                {
+                    "answer": "test 2 a1",
+                    "question": "test 2 q1",
+                    "symbol": {
+                        "color": "#a0c4ff",
+                        "number": 9690
+                    }
+                },
+                {
+                    "answer": "test 2 a2",
+                    "question": "test 2 q2",
+                    "symbol": {
+                        "color": "#ffadad",
+                        "number": 9637
+                    }
+                }
+            ]
+        }
+    ],
+    "className": "test",
+    "usedSymbols": [
+        {
+            "color": "#ffd6a5",
+            "number": 10809
+        },
+        {
+            "color": "#ffd6a5",
+            "number": 9691
+        },
+        {
+            "color": "#a0c4ff",
+            "number": 9690
+        },
+        {
+            "color": "#ffadad",
+            "number": 9637
+        }
+    ]
+}

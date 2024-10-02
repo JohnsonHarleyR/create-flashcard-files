@@ -90,7 +90,6 @@ def selectMenuOption(options):
         for i in range(0, len(options)):
             letterToPrint = getLetterFromIndex(i).upper()
             text = options[i][0]
-            #func = options[i][1]
             print(letterToPrint + ". " + text)
         userInput = input("\nSelected letter: ")
         selectedIndex = getOptionIndexByLetter(userInput)
@@ -124,8 +123,6 @@ def modifyFileInfo():
         newSymbol = generateRandomSymbol(fileInfo["usedSymbols"])
         question = input("Question or definition: ")
         answer = input("Answer: ")
-        # print("Test - newSymbol: ", newSymbol)
-        # print("Test - usedSymbols: ", fileInfo["usedSymbols"])
         flashcardsInChapter.append({
             "symbol": newSymbol,
             "question": question,
@@ -133,14 +130,10 @@ def modifyFileInfo():
         })
 
     def doesChapterAlreadyExist(chapterNumber):
-        #print("Does chapter " + str(chapterNumber) + " already exist?")
         chapters = fileInfo["chapters"]
         for chapter in chapters:
-            #print("checking chapter number " + str(chapter["chapterNumber"]))
             if chapter["chapterNumber"] == chapterNumber:
-                #print("Yes")
                 return True
-        #print("No")
         return False
 
     def getChapterIndex(chapterNumber):
@@ -156,7 +149,7 @@ def modifyFileInfo():
             print(str(chapter["chapterNumber"]) + ". " + chapter["chapterName"])
 
 
-    def assembleChapterWithFlashcards(chapterNumber, chapterName, flashcardsInChapter = []):
+    def assembleChapterWithFlashcards(chapterNumber, chapterName, flashcardsInChapter):
         addAnotherFlashcard = True
         while addAnotherFlashcard == True:
             addNewFlashcard(flashcardsInChapter)
@@ -195,8 +188,6 @@ def modifyFileInfo():
         replacementChapter = assembleChapterWithFlashcards(chapterNumber, chapterName, chapterFlashcards)
 
         fileInfo["chapters"][chapterIndex]["flashcards"] = replacementChapter["flashcards"]
-        # print("Test - chapters: ", fileInfo["chapters"])
-        # print("Test - fileInfo: ", fileInfo)
 
     def createNewChapter():
         global fileInfo
@@ -212,12 +203,9 @@ def modifyFileInfo():
                 print("That chapter number already exists. Please enter a new chapter.")
         
         chapterName = input("Chapter name: ")
-
-        chapter = assembleChapterWithFlashcards(chapterNumber, chapterName)
+        chapter = assembleChapterWithFlashcards(chapterNumber, chapterName, [])
         
         fileInfo["chapters"].append(chapter)
-        # print("Test - chapters: ", fileInfo["chapters"])
-        # print("Test - fileInfo: ", fileInfo)
             
     def saveFile():
         fileInfoAsJson = convertToJson(fileInfo)
@@ -225,8 +213,6 @@ def modifyFileInfo():
         print("name for file: ", nameForFile)
         with open(filePath, 'w') as convert_file: 
             convert_file.write(fileInfoAsJson)
-        # with open(nameForFile, 'w') as convert_file: 
-        #     convert_file.write(fileInfoAsJson)
         print("\nSave is complete!")
 
     def askToSaveFirst():
@@ -241,7 +227,6 @@ def modifyFileInfo():
 
     fileMenuOptions = [
         ["Create new chapter for adding flashcards", createNewChapter],
-        # ["Add new flashcard to chapter", addNewFlashcard],
         ["Modify existing chapter", modifyExistingChapter],
         ["Save progress", saveFile],
         ["Return to main menu", unavailableOption],
@@ -260,7 +245,6 @@ def exitFromMainMenu():
 
 # Menu Option Variables
 mainMenuOptions = [
-    # ["Create New File", modifyFileInfo],
     ["Create New File", createNewFile],
     ["Load Existing File", unavailableOption],
     ["Exit Program", exitFromMainMenu]
@@ -271,12 +255,3 @@ def showMainMenu():
 
 # Ask user to create or load file or exit
 showMainMenu()
-
-
-# Load existing
-
-# Create new file
-
-
-
-#flashcard options

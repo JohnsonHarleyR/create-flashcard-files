@@ -1,39 +1,15 @@
 {
     "chapters": [
         {
-            "chapterName": "test1",
+            "chapterName": "test 1",
             "chapterNumber": 1,
             "flashcards": [
                 {
                     "answer": "test 1 a",
-                    "question": "test 1",
+                    "question": "test 1 q",
                     "symbol": {
-                        "color": "#a0c4ff",
-                        "number": 10672
-                    }
-                },
-                {
-                    "answer": "test 2 a",
-                    "question": "test 2",
-                    "symbol": {
-                        "color": "#9bf6ff",
-                        "number": 9632
-                    }
-                },
-                {
-                    "answer": "test 3 a",
-                    "question": "test 3",
-                    "symbol": {
-                        "color": "#ffd6a5",
-                        "number": 9778
-                    }
-                },
-                {
-                    "answer": "test 4 a",
-                    "question": "test 4",
-                    "symbol": {
-                        "color": "#ffc6ff",
-                        "number": 10734
+                        "color": "#bdb2ff",
+                        "number": 9731
                     }
                 }
             ]
@@ -43,35 +19,11 @@
             "chapterNumber": 2,
             "flashcards": [
                 {
-                    "answer": "test 1 a",
-                    "question": "test 1",
-                    "symbol": {
-                        "color": "#a0c4ff",
-                        "number": 10672
-                    }
-                },
-                {
                     "answer": "test 2 a",
-                    "question": "test 2",
-                    "symbol": {
-                        "color": "#9bf6ff",
-                        "number": 9632
-                    }
-                },
-                {
-                    "answer": "test 3 a",
-                    "question": "test 3",
-                    "symbol": {
-                        "color": "#ffd6a5",
-                        "number": 9778
-                    }
-                },
-                {
-                    "answer": "test 4 a",
-                    "question": "test 4",
+                    "question": "test 2 q",
                     "symbol": {
                         "color": "#ffc6ff",
-                        "number": 10734
+                        "number": 9785
                     }
                 }
             ]
@@ -80,20 +32,12 @@
     "className": "test",
     "usedSymbols": [
         {
-            "color": "#a0c4ff",
-            "number": 10672
-        },
-        {
-            "color": "#9bf6ff",
-            "number": 9632
-        },
-        {
-            "color": "#ffd6a5",
-            "number": 9778
+            "color": "#bdb2ff",
+            "number": 9731
         },
         {
             "color": "#ffc6ff",
-            "number": 10734
+            "number": 9785
         }
     ]
 }
