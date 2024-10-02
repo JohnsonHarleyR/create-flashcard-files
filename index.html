@@ -11,7 +11,9 @@
     <br>
     <label for="fileName">Flashcards file name:</label>
     <input type="text" id="fileName" name="fileName">
-    <button id="fileNameButton">Submit</button>
+    <button id="fileNameButton" onclick="loadFile()">Submit</button>
+    <br>
+    <p id="loadErrorMessage"></p>
     <br>
     <div id="flashcard" onclick="flipSide()">
         <div id="symbol">symbol test</div>
@@ -22,30 +24,52 @@
     </div>
 
     <script>
-        let fileName = "";
+        let fileName = "test2.txt";
         let chapterNumber = -1;
         let className = "Class Name Text";
 
         let symbolCode = '\u{2600}';
         let symbolColor = "#caffbf";
         let question = "Question text here";
-        let answer = "answer text here";
+        let answer = "Answer text here";
         let sideToShow = 0;
+
+        selectedChapter = 0;
+        selectedFlashcard = 0;
 
         let flashCardSymbol = document.getElementById("symbol");
         let classNameText = document.getElementById("className");
         let chapterNumberText = document.getElementById("chapterNumber");
         let questionOrAnswerText = document.getElementById("questionOrAnswer")
+        let fileNameInput = document.getElementById("fileName");
+        let loadErrorText = document.getElementById("loadErrorMessage");
+        
+        function loadFile() {
+            fileName = fileNameInput.value;
+            if (!fileName.includes(".txt")) {
+                loadErrorText.textContent = "Filename needs to include .txt at the end.";
+                return;
+            } else {
+                loadErrorText.textContent = "";
+            }
+
+            // let reader = new FileReader();
+            // result = reader.readAsText("files/" + fileName);
+            // console.log(result);
+        }
+
+        function showFlashcard() {
+            flashCardSymbol.textContent = symbolCode;
+            flashCardSymbol.style.color = symbolColor;
+            classNameText.textContent = className;
+            chapterNumberText.textContent = chapterNumber;
+            questionOrAnswerText.textContent = sideToShow === 0 ? question : answer;
+        }
 
         // On initial load
-        flashCardSymbol.textContent = symbolCode;
-        flashCardSymbol.style.color = symbolColor;
-        classNameText.textContent = className;
-        chapterNumberText.textContent = chapterNumber;
-        questionOrAnswerText.textContent = sideToShow === 0 ? question : answer;
+        showFlashcard();
 
         function flipSide() {
-            console.log("flip side");
             sideToShow = sideToShow === 0 ? 1 : 0;
             questionOrAnswerText.textContent = sideToShow === 0 ? question : answer;
         }
